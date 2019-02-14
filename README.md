@@ -194,7 +194,7 @@ UserExperior will upload the data, which could be seen within 5-7 minutes on the
 				// this exception is explicitly thrown just for example  
 				throw new NullPointerException();  
 			} catch (NullPointerException e){  
-				UserExperior._sendException_(e, "NullPointerException at MainActivity onBack");  
+				UserExperior.sendException(e, "NullPointerException at MainActivity onBack");  
 				e.printStackTrace();  
 			}  
 			onBackPressed();  
