@@ -1,3 +1,4 @@
+
 # UserExperior Integration
 # Android - Native
 
@@ -89,7 +90,7 @@ UserExperior will upload the data, which could be seen within 5-7 minutes on the
 
 3. **Mask Sensitive Views**
 
-	UserExperior SDK by default masks all the Edit Boxes which are passwords (number, text or combination, etc.). If you also want to mask any other UI element in your app, you can mask it by:
+	UserExperior SDK by default masks all the Edit Boxes. If you wish to mask any other UI element in your app, you can mask it by:
 
 	-  Using XML Tag
 	
@@ -103,14 +104,20 @@ UserExperior will upload the data, which could be seen within 5-7 minutes on the
 				android:layout_height="200dp"  
 				android:background="@android:color/transparent"  
 				android:tag="com.userexperior.ueSecureView"/>
+		
+		or you can add Tag Programmatically:
+		
+			anyView = findViewById(R.id.anyView);  
+			anyView.setTag("com.userexperior.ueSecureView");
+
 	- Using API
 	
 			void addInSecureViewBucket(View view)
 
 		Code Example:
 		
-			mobnum = (EditText) findViewById(R.id.mobnum);  
-			SecureViewBucket.addInSecureViewBucket(mobnum);
+			anyView = findViewById(R.id.anyView);  
+			SecureViewBucket.addInSecureViewBucket(anyView);
 
 4. **Identify Screens**
 
@@ -278,3 +285,21 @@ UserExperior SDK also writes some useful logs in the Android Studio IDE during r
 3. In case OutOfMemoryError please add following in `<application>`  tag
 
 		android:[largeHeap]="true"
+4. If you find this log under logcat "**Unable to start service Intent { cmp=com.yourcompanydomain.yourappname/com.userexperior.services.recording.EventSession (has extras) } U=0: not found**", please add following services manually to your app's AndroidManifest.xml:
+
+		<service  
+		  android:name="com.userexperior.services.UploadService"  
+		  android:enabled="true"  
+		  android:exported="false" />  
+  
+		<service  
+		  android:name="com.userexperior.services.recording.EventSession"  
+		  android:enabled="true"  
+		  android:exported="false">  
+		</service>  
+  
+		<service  
+		  android:name="com.userexperior.services.recording.ScreenShotService"  
+		  android:enabled="true"  
+		  android:exported="false">  
+		</service>
